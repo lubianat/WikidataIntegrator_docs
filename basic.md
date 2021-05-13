@@ -25,7 +25,7 @@ You'll first write code to create an object of the class `WDString` saying somet
 ```python3
 from wikidataintegrator import wdi_core
         
-entrez_value = "50943
+entrez_value = "50943"
 entrez_property = "P351"
      
 entrez_statement = wdi_core.WDString(value=entrez_value,
@@ -42,13 +42,23 @@ data = [entrez_statement]
 
 With the data list set, we can create our WDItemEngine object:
 
+
 ```python3
 wd_item = wdi_core.WDItemEngine(data=data)
 ```
 
 This object contains the set of statements in the `data` object. 
-It does not yet points to any Wikidata item, though! It just has statements about _something_. 
-That identification will be done in the writing step. 
+Even though you just added statements about _something_, the WDItemEngine constructor
+got from Wikidata the item that matched the data:  [FOXP3](https://www.wikidata.org/wiki/Q21163319).
+
+You can see it by running:
+
+```python3
+print(wd_item.wd_item_id)
+# "Q21163319"
+```
+
+If no object is found, the `wd_item.wd_item_id` will simply be empty. 
 
 Before writing to Wikidata, we will have to login. 
 
@@ -60,7 +70,10 @@ You can also use normal user credentials, but then you will have less permission
 
 The credentials are loaded in an object of the class `WDLogin` by the following code:
 
-`login_instance = wdi_login.WDLogin(user='<username>', pwd='<password>')`
+```python3
+from wikidataintegrator import wdi_login
+login_instance = wdi_login.WDLogin(user='<username>', pwd='<password>')
+```
 
 ## Writing data to Wikidata: WDItemEngine.write
 
@@ -72,13 +85,9 @@ To run it, just type:
  ```
 Note that you are passing the login_instance as a parameter: the function will use the credentials there
 to write to Wikidata.
-To perform the writing, WDI tries to identify an item with data in the `data` slot. In the example here, it 
-would identify the item for [FOXP3](https://www.wikidata.org/wiki/Q21163319), which matches the data. 
-It would not, however, write anything: that statement is already present! 
 
-N
-
-
+If the `wd_item.wd_item_id` is empty, WDI will create a new item with the data.
+If the `wd_item.wd_item_id` points to an Wikidata QID, WDI will add the statements to this item. 
 
 
 
