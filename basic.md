@@ -89,6 +89,38 @@ to write to Wikidata.
 If the `wd_item.wd_item_id` is empty, WDI will create a new item with the data.
 If the `wd_item.wd_item_id` points to an Wikidata QID, WDI will add the statements to this item. 
 
+As there is no new information, in this example, WDI will do nothing. 
+
+## Adding labels, descriptions and aliases to items
+
+Now let's try and write something new to Wikidata. 
+
+We can change an items' label via WDI using the method `WDItemEngine.set_label`:
+
+```python3
+wd_item.set_label(label="FOXP3", lang="pt-br")
+```
+
+That line of code will add to the wd_item object the instructions for setting the label "FOXP3" in Brazilian portuguese.
+Let's write it to Wikidata:
+
+```python3
+wd_item.write(login_instance)
+```
+WDI handle the whole bureaucracy of making the update; you can see the diff for this change [here](https://www.wikidata.org/w/index.php?title=Q21163319&diff=1420047243&oldid=1400447217&diffmode=source)
+
+In the same way, we can add aliases and descriptions with `WDItemEngine.set_aliases` and `WDItemEngine.set_description`. 
+The only detail is that the aliases should be provided as a `["list"]`, not a plain `"str"`.
+
+```python3
+wd_item.set_description(description="gene codificante da espécie Homo sapiens", lang="pt-br")
+wd_item.set_aliases(aliases=["forkhead box P3"], lang="pt-br")
+wd_item.write(login_instance)
+```
+
+Done! ([diff for that change on Wikidata](https://www.wikidata.org/w/index.php?title=Q21163319&diff=1420048883&oldid=1420047243&diffmode=source))
+
+
 
 
 
