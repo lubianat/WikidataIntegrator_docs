@@ -42,7 +42,7 @@ from wikidataintegrator import wdi_core, wdi_login, wdi_helpers
 login_instance = wdi_login.WDLogin(user=user, pwd=pwd)
 
 wdi_publication_helper = wdi_helpers.PublicationHelper(
-                                    ext_id="10.7554/eLife.64943",
+                                    ext_id="10.7554/eLife.67077",
                                     id_type="doi",
                                     source="crossref")
                                     
