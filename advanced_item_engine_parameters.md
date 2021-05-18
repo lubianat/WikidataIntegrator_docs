@@ -43,7 +43,7 @@ This can be used in conjunction with wd_item_id in order to provide raw data dir
 
 A boolean that sets up debug mode, providing verbose output. 
 
-# data`-based inference of item ID parameters 
+# `data`-based inference of item ID parameters 
 
 ## core_props
 
