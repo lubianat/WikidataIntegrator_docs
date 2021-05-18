@@ -26,7 +26,7 @@ Instead of overwriting the information, WDI will append any new values and leave
 
 It will still update references of existing statements that match the data, though.
 
-# fast run parameters
+# Fast run parameters
 
 More on that mode in the [fast run tutorial](./advanced_fast_run.md). 
 
@@ -44,7 +44,7 @@ From documentation:
 If `True`, fastrun mode will consider references in determining if a statement should
 be updated and written to Wikidata. Otherwise, only the value and qualifiers are used. Default: False
 
-# custom references parameters
+# Custom references parameters
 
 ## global_ref_mode
 
@@ -68,4 +68,30 @@ The function should return the WDItemEngine that will be written, where only the
 
 This function is also used in fast run. 
 
+## good_refs
 
+Modified from  docs:
+
+This parameter lets the user define blocks of good references. It is a list of dictionaries.
+      
+Each dictionary contains Wikidata properties as keys and the "good reference" values. If `None`, it
+just checks for the existence of that property, regardless of value
+
+Example: [{'P248': 'Q905695', 'P352': None, 'P407': None, 'P1476': None, 'P813': None}]
+             
+This example says that a good reference is the one that contains:
+        
+        - P248' (stated in) 'Q905695' (UniProt)
+        - P352 (some Uniprot iD)
+        - P407 (some title of the uniprot entry)
+        - P1476 (some language of the work)
+        - P813 (some date of retrieval. 
+        
+You can set as many blocks like this as you want, to specify a range of good reference sets. 
+
+## keep_good_ref_statements
+
+From docs:
+
+Do not delete any statement which has a good reference, either defined in the
+        good_refs list or by any other referencing mode.
