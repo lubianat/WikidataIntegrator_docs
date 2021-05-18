@@ -26,6 +26,36 @@ Instead of overwriting the information, WDI will append any new values and leave
 
 It will still update references of existing statements that match the data, though.
 
+## search_only
+
+A boolean that sets the `WDItemEngine` to only look for the item on Wikidata, and never update it. 
+Good for checks.
+
+## item_data
+
+Modified from docs:
+
+A Python JSON object corresponding to the Wikidata item in the `wd_item_id` slot.
+This can be used in conjunction with wd_item_id in order to provide raw data directly, instead of using the `data` slot with `WDBaseDataType` objects.
+
+
+## debug
+
+A boolean that sets up debug mode, providing verbose output. 
+
+# data`-based inference of item ID parameters 
+
+## core_props
+
+Modified from docs:
+        A set of property IDs to be considered when inferring an Wikidata item based on `data`.
+        If None, all Wikidata properties with a [distinct values constraint](https://www.wikidata.org/wiki/Q21502410) will be used.
+
+## core_prop_match_thresh
+
+From docs:
+    The proportion of core props that must match during retrieval of an item
+
 # Fast run parameters
 
 More on that mode in the [fast run tutorial](./advanced_fast_run.md). 
@@ -43,6 +73,10 @@ A property-value dictionary, setting a filter for the fast run mode.
 From documentation:
 If `True`, fastrun mode will consider references in determining if a statement should
 be updated and written to Wikidata. Otherwise, only the value and qualifiers are used. Default: False
+
+## fast_run_case_insensitive
+
+(No docstring) 
 
 # Custom references parameters
 
@@ -95,3 +129,43 @@ From docs:
 
 Do not delete any statement which has a good reference, either defined in the
         good_refs list or by any other referencing mode.
+        
+# HTTP request / other wikibase parameters
+
+## user_agent
+
+From docs:
+    The user agent string to use when making http requests
+    
+    
+## mediawiki_api_url
+
+The URL of the MediaWiki API to use.
+Defaults to Wikidata ('https://www.wikidata.org/w/api.php'), but other wikibase APIs can be used.
+
+## sparql_endpoint_url
+
+The URL of the SPARQL endpoind to perform the queries. 
+Defaults to Wikidata ('https://query.wikidata.org/sparql'), but other SPARQL endpoints can be used.
+
+## wikibase_url
+The URL of the Wikibase that is being targeted (not the API): 
+Defaults to Wikidata ('http://www.wikidata.org),  but other wikibases can be used.
+
+## concept_base_uri
+
+The base URI to come before QIDs and PIDs. 
+Defaults to Wikidata base URI ('http://www.wikidata.org/entity/'), but other base URIs can be used. 
+
+
+## property_constraint_pid
+
+The URI that is used in the Wikibase to indicate a constraint.
+This is used by the `core_props` parameter. 
+Defaults to Wikidata property constraint, ['P2302'](https://www.wikidata.org/wiki/Property:P2302)
+
+## distinct_values_constraint_qid
+
+The value used for defining a "distinc values" constraint for properties in the Wikibase targeted. 
+This is used by the `core_props` parameter. 
+Defaults to Wikidata item for distinct values, ['Q21502410'](https://www.wikidata.org/wiki/Q21502410)
