@@ -1,6 +1,6 @@
 # A deeper look into wdi_core.WDItemEngine()
 
-The `WDItemEngine()` method of Wikidata Integrator (WDI) does a lot of stuff, and can be heavily customized.
+The `WDItemEngine` class of Wikidata Integrator (WDI) does a lot of stuff, and can be heavily customized.
 In this docs, I'll take a look at each of the parameters, expanding on the [documentation](https://github.com/SuLab/WikidataIntegrator/blob/main/wikidataintegrator/wdi_core.py).
 
 # Base parameters 
